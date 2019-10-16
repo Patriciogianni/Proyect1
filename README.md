@@ -22,7 +22,13 @@ The employee would have a MENU with five options to operate with. Before the log
 5- Save and load data. This is very important, you can save your work, turn off the computer and turn on the next day with the information    still in the system.
    ¿How? Because, when you saved it, all the information will be stored in a repository that is linked in the code (an XML file). 
    Tomorrow you will have to go to number five and recovered what you have done if you want to see all the information loaded.
-   
+
+# Things To Consider 
+
+- The architecture: I didn´t pay attention to that. It wasn´t my intention to make a nice proyect in the folder organization or the elements display. That would be an ASP.NET MVC proyect (and it will be my next move, not this one).
+- No Exceptions: It´s simply because an exception will stop my entire program once it happens, so I only put simple validations to show you that i can do it.
+- Challenge: I know what you are going to say; "This could be much easier if you just..." Yes, it probably would... but the things is, i wanted to be that rought. Becouse this proyect means that i can fit in a problem and work it out. I wanted to be problematic and see how i manage to pull this off. 
+
 # Conclusion   
    
 It`s a very intuitive program where you can`t get lost. Easy, quick and put every part of my brain to the test.    
