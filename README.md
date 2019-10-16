@@ -1,5 +1,5 @@
 # Proyecto1
-Primer proyecto para practicar lo aprendido -- First proyect in order to practice what I`ve learned
+First proyect in order to practice what I`ve learned
 
 # Presentation 
 
