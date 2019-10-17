@@ -14,7 +14,7 @@ namespace Proyecto1.Domain
         private static int opcion;
         private static string listDesition;
 
-        static Person createPerson()
+        Person createPerson()
         {
             Person person = new Person();
 
@@ -22,11 +22,6 @@ namespace Proyecto1.Domain
             {
                 Console.WriteLine("Escribe el DU");
                 person.Du = Convert.ToInt32(Console.ReadLine());
-
-                if (person.Du < 1000000)
-                {
-                    Console.WriteLine("DU incorrecto, escribalo de nuevo");
-                }
 
             } while (person.Du < 1000000);
 
@@ -44,43 +39,40 @@ namespace Proyecto1.Domain
                 Console.WriteLine("Escribe la Edad");
                 person.Age = Convert.ToInt32(Console.ReadLine());
 
-                if (person.Age < 18)
-                {
-                    Console.WriteLine("Los empleados no pueden ser menores de edad");
-                }
-
             } while (person.Age < 18);
-
+            
             Console.WriteLine("Escriba la fecha de nacimiento con formato: dia/mes/año");
             person.DateBirth = Console.ReadLine();
 
-            person.CodePerson = person.generateCodePerson().ToString("00000");
+            person.generateCode(person);
 
-            person.showPerson(); // Me muestra la persona completa para verificar que este bien cargado.
+            person.PersonDate = DateTime.Now;
+
+            person.show(); // Me muestra la persona completa para verificar que este bien cargado.
 
             return person;
         }
-        static File createFile(List<Person> personList, string idfile) // Recibe la lista de personas y el codigo cargado a la persona
+         File createFile(List<Person> personList, string idfile) // Recibe la lista de personas y el codigo cargado a la persona
         {
             File file = new File();
             file.IdFile = idfile; // el codigo de la persona ingresado sera el codigo del legajo.
             Console.WriteLine("Ingrese el codigo de la persona");
-            string code = Console.ReadLine();
-            file.Person = personList.Find(p => code.Equals(p.CodePerson)); // Recorre la lista y encuentra una persona donde la condicion de que el codigo y el Id sean iguales, para luego mostrarlo.
+            string Code = Console.ReadLine();
+            file.Person = personList.Find(p => Code.Equals(p.Code)); // Recorre la lista y encuentra una persona donde la condicion de que el codigo y el Id sean iguales, para luego mostrarlo.
             // la clase file tiene como atributo a Person (persona)
             file.toString();//Lo mostramos.
             Console.WriteLine("Se ha generado con éxito el numero de Legajo");
             Console.WriteLine(" ");
             return file;
         }
-        static int generateId() // Generar el Id del legajo.
+         int generateId() // Generar el Id del legajo.
         {
-            int code;
+            int Code;
             Random random = new Random();
-            code = random.Next(1, 99);
-            return code;
+            Code = random.Next(1, 99);
+            return Code;
         }
-        static DefinitivePerson createDefinitivePerson(Person person, File file)
+         DefinitivePerson createDefinitivePerson(Person person, File file)
         {
             DefinitivePerson person1 = new DefinitivePerson();
 
@@ -90,61 +82,60 @@ namespace Proyecto1.Domain
             person1.Name = person.Name;
             person1.Age = person.Age;
             person1.DateBirth = person.DateBirth;
-            person1.CodePerson = person.CodePerson;
+            person1.Code = person.Code;
             person1.FileDef = file.IdFile;
+            person1.PersonDate = person.PersonDate;
 
             return person1;
         }
 
-        static void modificateDefPerson(int opcionCampo, DefinitivePerson p)
+         void modificateDefPerson(int opcionCampo, DefinitivePerson p)
         {
-            if (opcionCampo == 1)
+            switch (opcionCampo)
             {
-                Console.WriteLine("Escriba el nuevo DU respetando las reglas de validación");
-                int newDU = Convert.ToInt32(Console.ReadLine());
-                p.Du = newDU;
-            }
+                case 1:
+                    Console.WriteLine("Escriba el nuevo DU respetando las reglas de validación");
+                    int newDU = Convert.ToInt32(Console.ReadLine());
+                    p.Du = newDU;
+                    break;
 
-            if (opcionCampo == 2)
-            {
-                Console.WriteLine("Escriba la nueva opcion de genero");
-                string newGender = Console.ReadLine();
-                p.Gender = newGender;
-            }
+                case 2:
+                    Console.WriteLine("Escriba la nueva opcion de genero");
+                    string newGender = Console.ReadLine();
+                    p.Gender = newGender;
+                    break;
 
-            if (opcionCampo == 3)
-            {
-                Console.WriteLine("Escriba el nuevo apellido");
-                string newLastName = Console.ReadLine();
-                p.LastName = newLastName;
-            }
+                case 3:
+                    Console.WriteLine("Escriba el nuevo apellido");
+                    string newLastName = Console.ReadLine();
+                    p.LastName = newLastName;
+                    break;
 
-            if (opcionCampo == 4)
-            {
-                Console.WriteLine("Escriba el nuevo Nombre");
-                string newName = Console.ReadLine();
-                p.Name = newName;
-            }
+                case 4:
+                    Console.WriteLine("Escriba el nuevo Nombre");
+                    string newName = Console.ReadLine();
+                    p.Name = newName;
+                    break;
 
-            if (opcionCampo == 5)
-            {
-                Console.WriteLine("Escriba la nueva Edad respetando las reglas de validación");
-                int newAge = Convert.ToInt32(Console.ReadLine());
-                p.Age = newAge;
-            }
+                case 5:
+                    Console.WriteLine("Escriba la nueva Edad respetando las reglas de validación");
+                    int newAge = Convert.ToInt32(Console.ReadLine());
+                    p.Age = newAge;
+                    break;
 
-            if (opcionCampo == 6)
-            {
-                Console.WriteLine("Escriba la nueva Fecha de Nacimiento");
-                string newDateBirth = Console.ReadLine();
-                p.DateBirth = newDateBirth;
+                case 6:
+                    Console.WriteLine("Escriba la nueva Fecha de Nacimiento");
+                    string newDateBirth = Console.ReadLine();
+                    p.DateBirth = newDateBirth;
+                    break;
             }
+           
             Console.WriteLine(" ");
             Console.WriteLine("Su modificación se ha realizado con exito");
             Console.WriteLine(" ");
         }
 
-        static void showAllList(List<DefinitivePerson> defList, List<Person> personList, List<File> fileList)
+         void showAllList(List<DefinitivePerson> defList, List<Person> personList, List<File> fileList)
         {
             do
             {
@@ -161,7 +152,7 @@ namespace Proyecto1.Domain
                         Console.WriteLine(" ");
                         foreach (DefinitivePerson d in defList)
                         {
-                            Console.WriteLine(d.FileDef + " " + d.Du + " " + d.LastName + ", " + d.Name + " " + d.CodePerson);
+                            Console.WriteLine(d.FileDef + " " + d.Du + " " + d.LastName + ", " + d.Name + " " + d.Code + " " + d.PersonDate);
                         }
                         Console.WriteLine("----------------------------------------");
                         break;
@@ -172,7 +163,7 @@ namespace Proyecto1.Domain
                         Console.WriteLine(" ");
                         foreach (Person p in personList)
                         {
-                            Console.WriteLine(p.CodePerson + " " + p.LastName + ", " + p.Name);
+                            Console.WriteLine(p.Code + " " + p.LastName + ", " + p.Name);
                         }
                         Console.WriteLine("----------------------------------------");
                         Console.WriteLine(" ");
@@ -196,19 +187,19 @@ namespace Proyecto1.Domain
             } while (listDesition == "s");
         }
 
-        static void showPersonListSave(List<DefinitivePerson> saveList)
+         void showListSave(List<DefinitivePerson> saveList)
         {
             Console.WriteLine("Lista de datos guardados");
             Console.WriteLine(" ");
             foreach (DefinitivePerson d in saveList)
             {
-                Console.WriteLine(d.FileDef + " " + d.Du + " " + d.LastName + ", " + d.Name + " " + d.CodePerson);
+                Console.WriteLine(d.FileDef + " " + d.Du + " " + d.LastName + ", " + d.Name + " " + d.Code + " " + d.PersonDate);
             }
             Console.WriteLine(" ");
 
         }
 
-        public void showMenu()
+         public void showMenu()
         {
             List<Person> personList = new List<Person>();
             List<File> fileList = new List<File>();
@@ -260,10 +251,10 @@ namespace Proyecto1.Domain
                     case 1:
 
                         Console.WriteLine("Ingrese el codigo del empleado que desea eliminar de forma permanente");
-                        string codeRemoved = Console.ReadLine();
-                        defList.RemoveAll(r => r.CodePerson == codeRemoved);
-                        personList.RemoveAll(r => r.CodePerson == codeRemoved);
-                        fileList.RemoveAll(r => r.Person.CodePerson == codeRemoved);
+                        string CodeRemoved = Console.ReadLine();
+                        defList.RemoveAll(r => r.Code == CodeRemoved);
+                        personList.RemoveAll(r => r.Code == CodeRemoved);
+                        fileList.RemoveAll(r => r.Person.Code == CodeRemoved);
                         Console.WriteLine("El empleado se ha eliminado con exito");
                         Console.WriteLine(" ");
                         break;
@@ -273,7 +264,7 @@ namespace Proyecto1.Domain
                         Console.WriteLine("Escriba de forma exacta el legajo que desea buscar");
                         string fileSearch = Console.ReadLine();
                         DefinitivePerson personSearch = defList.Find(r => r.FileDef == fileSearch);
-                        personSearch.ShowDefPerson();
+                        personSearch.showDefPerson();
 
                         Console.WriteLine("Desea Modificarlo? s / n");
                         string opcionMod = Console.ReadLine();
@@ -288,27 +279,7 @@ namespace Proyecto1.Domain
                             Console.WriteLine("6- FechaDeNacimiento");
 
                             int opcionCampo = Convert.ToInt32(Console.ReadLine());
-                            switch (opcionCampo)
-                            {
-                                case 1:
-                                    modificateDefPerson(opcionCampo, personSearch);
-                                    break;
-                                case 2:
-                                    modificateDefPerson(opcionCampo, personSearch);
-                                    break;
-                                case 3:
-                                    modificateDefPerson(opcionCampo, personSearch);
-                                    break;
-                                case 4:
-                                    modificateDefPerson(opcionCampo, personSearch);
-                                    break;
-                                case 5:
-                                    modificateDefPerson(opcionCampo, personSearch);
-                                    break;
-                                case 6:
-                                    modificateDefPerson(opcionCampo, personSearch);
-                                    break;
-                            }
+                            modificateDefPerson(opcionCampo, personSearch);
                         }
                         break;
 
@@ -332,7 +303,7 @@ namespace Proyecto1.Domain
                         {
                             case 1:
 
-                                using (Stream fs1 = new FileStream(@"C:/Users/User/Desktop/Kripta/Proyecto1/Proyecto1/DefinitivePerson.txt", FileMode.Create, FileAccess.Write, FileShare.None))
+                                using (Stream fs1 = new FileStream(@"C:\Users\User\Desktop\PatoPato\Proyect1/DefinitivePerson.txt", FileMode.Create, FileAccess.Write, FileShare.None))
                                 {
                                     //Ponemelo en un formato xml de tipo lista DefinitivePerson.
                                     XmlSerializer serializer11 = new XmlSerializer(typeof(List<DefinitivePerson>));
@@ -340,14 +311,14 @@ namespace Proyecto1.Domain
                                     fs1.Close();
                                 }
 
-                                using (Stream fs2 = new FileStream(@"C:/Users/User/Desktop/Kripta/Proyecto1/Proyecto1/Person.txt", FileMode.Create, FileAccess.Write, FileShare.None))
+                                using (Stream fs2 = new FileStream(@"C:\Users\User\Desktop\PatoPato\Proyect1/Person.txt", FileMode.Create, FileAccess.Write, FileShare.None))
                                 {
                                     XmlSerializer serializer12 = new XmlSerializer(typeof(List<Person>));
                                     serializer12.Serialize(fs2, personList); // Guardalo
                                     fs2.Close();
                                 }
 
-                                using (Stream fs3 = new FileStream(@"C:/Users/User/Desktop/Kripta/Proyecto1/Proyecto1/File.txt", FileMode.Create, FileAccess.Write, FileShare.None))
+                                using (Stream fs3 = new FileStream(@"C:\Users\User\Desktop\PatoPato\Proyect1/File.txt", FileMode.Create, FileAccess.Write, FileShare.None))
                                 {
                                     XmlSerializer serializer13 = new XmlSerializer(typeof(List<File>));
                                     serializer13.Serialize(fs3, fileList); // Guardalo
@@ -362,7 +333,7 @@ namespace Proyecto1.Domain
                             case 2:
 
                                 XmlSerializer serializer21 = new XmlSerializer(typeof(List<DefinitivePerson>));
-                                using (Stream fs21 = new FileStream("C:/Users/User/Desktop/Kripta/Proyecto1/Proyecto1/DefinitivePerson.txt", FileMode.Open, FileAccess.Read, FileShare.None))
+                                using (Stream fs21 = new FileStream("C:/Users/User/Desktop/PatoPato/Proyect1/DefinitivePerson.txt", FileMode.Open, FileAccess.Read, FileShare.None))
                                 {
                                     //Mete lo recuperado de nuevo en la lista.
                                     defList = (List<DefinitivePerson>)serializer21.Deserialize(fs21);
@@ -370,19 +341,19 @@ namespace Proyecto1.Domain
                                 }
 
                                 XmlSerializer serializer22 = new XmlSerializer(typeof(List<Person>));
-                                using (Stream fs22 = new FileStream("C:/Users/User/Desktop/Kripta/Proyecto1/Proyecto1/Person.txt", FileMode.Open, FileAccess.Read, FileShare.None))
+                                using (Stream fs22 = new FileStream("C:/Users/User/Desktop/PatoPato/Proyect1/Person.txt", FileMode.Open, FileAccess.Read, FileShare.None))
                                 {
                                     personList = (List<Person>)serializer22.Deserialize(fs22);
                                     fs22.Close();
                                 }
 
                                 XmlSerializer serializer23 = new XmlSerializer(typeof(List<File>));
-                                using (Stream fs23 = new FileStream("C:/Users/User/Desktop/Kripta/Proyecto1/Proyecto1/File.txt", FileMode.Open, FileAccess.Read, FileShare.None))
+                                using (Stream fs23 = new FileStream("C:/Users/User/Desktop/PatoPato/Proyect1/File.txt", FileMode.Open, FileAccess.Read, FileShare.None))
                                 {
                                     fileList = (List<File>)serializer23.Deserialize(fs23);
                                     fs23.Close();
                                 }
-                                showPersonListSave(defList);
+                                showListSave(defList);
                                 break;
                         }
                         break;

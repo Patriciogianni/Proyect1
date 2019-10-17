@@ -41,7 +41,7 @@ namespace Proyecto1.Domain
         public void toString()
         {
             Console.WriteLine("Id del legajo: {0}\n", IdFile);
-            Console.WriteLine("Codigo de la persona : {0}\n", Person.CodePerson);
+            Console.WriteLine("Codigo de la persona : {0}\n", Person.Code);
         }
     }
 }

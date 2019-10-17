@@ -22,7 +22,8 @@ namespace Proyecto1.Domain
             }
 
         }
-        public void ShowDefPerson()
+
+        public void showDefPerson()
         {
             Console.WriteLine(" ");
             Console.WriteLine("Persona Definitiva");
@@ -33,7 +34,7 @@ namespace Proyecto1.Domain
             Console.WriteLine("Nombre: {0}\n", Name);
             Console.WriteLine("Edad: {0}\n", Age);
             Console.WriteLine("Fecha de Nacimiento: {0}\n", DateBirth);
-            Console.WriteLine("Codigo de la persona : {0}\n", CodePerson);
+            Console.WriteLine("Codigo de la persona : {0}\n", Code);
             Console.WriteLine("Legajo: {0}\n", FileDef);
             Console.WriteLine("-----------------------------------");
         }

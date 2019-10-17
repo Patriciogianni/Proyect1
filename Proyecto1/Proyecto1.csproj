@@ -49,7 +49,6 @@
     <Compile Include="Domain\Person.cs" />
     <Compile Include="Domain\Statistics.cs" />
     <Compile Include="Domain\User.cs" />
-    <Compile Include="Domain\Validation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

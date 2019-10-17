@@ -10,7 +10,6 @@ namespace Proyecto1.Domain
     {
         private string name;
         private string password;
-
         public string Name
         {
             get
@@ -32,7 +31,16 @@ namespace Proyecto1.Domain
 
             set
             {
-                password = value;
+               
+               if (!value.StartsWith("L"))
+               {
+                 Console.WriteLine("Contraseña Incorrecta, ingrese nuevamente. Debe ser el numero de su legajo: L___");
+                 password = value;   
+               }
+               else
+               {
+                 password = value;
+               }     
             }
         }
     }

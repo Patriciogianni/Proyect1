@@ -19,26 +19,33 @@ namespace Proyecto1
             Console.WriteLine("Se detecta que no tiene un usuario activo en la aplicacion, debe generarlo para realizar una operacion");
             Console.WriteLine(" ");
         }
-        static User firstLogin()
+        static void firstLogin()
         {
+
             User user = new User();
 
             Console.WriteLine("Escriba el nombre de usuario");
             user.Name = Console.ReadLine();
-            Console.WriteLine("Escriba su contraseña");
-            user.Password = Console.ReadLine();
 
-            return user;
+            do
+            {
+                Console.WriteLine("Escriba su contraseña");
+                user.Password = Console.ReadLine();
+
+            } while (!user.Password.StartsWith("L"));
+
+            Console.WriteLine("Contraseña correcta");
+            Console.WriteLine(" ");
+            Console.WriteLine("Bienvenido {0} !!!", user.Name);
+            Console.WriteLine(" ");
         }
 
         static void Main(string[] args)
         {
             printWelcomeMessage();
             firstLogin();
-
             Menu menu = new Menu();
             menu.showMenu();
-
         }
     }
 }

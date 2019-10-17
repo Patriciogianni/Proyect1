@@ -15,7 +15,8 @@ namespace Proyecto1.Domain
         private string name;
         private int age;
         private string dateBirth;
-        private string codePerson;
+        private string code;
+        private DateTime personDate;
         public int Du
         {
             get
@@ -25,9 +26,15 @@ namespace Proyecto1.Domain
 
             set
             {
-                du = value;
+                if (value < 1000000)
+                {
+                    Console.WriteLine("DU incorrecto, escribalo de nuevo");
+                }
+                else
+                {
+                    du = value;
+                }
             }
-
         }
         public string Gender
         {
@@ -75,12 +82,18 @@ namespace Proyecto1.Domain
             {
                 return age;
             }
-
+             
             set
             {
-                age = value;
+                if (value < 18)
+                {
+                    Console.WriteLine("Los empleados no pueden ser menores de edad");
+                }
+                else
+                {
+                    age = value;
+                }
             }
-
         }
 
         public string DateBirth
@@ -97,29 +110,45 @@ namespace Proyecto1.Domain
 
         }
 
-        public string CodePerson
+        public string Code
         {
             get
             {
-                return codePerson;
+                return code;
             }
 
             set
             {
-                codePerson = value;
+                code = value;
             }
 
         }
 
-        public int generateCodePerson()
+        public DateTime PersonDate
         {
-            int code;
-            Random random = new Random();
-            code = random.Next(100, 1000);
-            return code;
+            get
+            {
+                return personDate;
+            }
+
+            set
+            {
+                personDate = value;
+            }
+
         }
 
-        public void showPerson() // Muestro por patallla lo cargado.
+        public Person generateCode(Person p)
+        {
+            int Code;
+            Random random = new Random();
+            Code = random.Next(100, 1000);
+            p.Code = Code.ToString("00000");
+            return p;
+            //return Code;
+        }
+
+        public void show() // Muestro por patallla lo cargado.
         {
             Console.WriteLine(" ");
             Console.WriteLine("Estos son los Datos Cargados...");
@@ -130,7 +159,8 @@ namespace Proyecto1.Domain
             Console.WriteLine("Nombre: {0}\n", Name);
             Console.WriteLine("Edad: {0}\n", Age);
             Console.WriteLine("Fecha de Nacimiento: {0}\n", DateBirth);
-            Console.WriteLine("Codigo de la persona : {0}\n", CodePerson);
+            Console.WriteLine("Codigo: {0}\n", Code);
+            Console.WriteLine("Día Cargado: {0}\n", PersonDate);
             Console.WriteLine("Se ha guardado la persona en la base de datos\n");
             Console.WriteLine("-----------------------------------");
         }
