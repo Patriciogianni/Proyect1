@@ -1,4 +1,4 @@
-# Proyecto1
+# Proyect1
 First proyect in order to practice what I`ve learned
      
 # Presentation
