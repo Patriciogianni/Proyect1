@@ -12,10 +12,15 @@ It`s a ConsoleApp coding in C# whith OPP.
 The employee would have a MENU with five options to operate with. Before the log in part wich is very simple. 
       
 1- Is to add the new person into the Database with a file number on it. That number would become the one and only id and that              is how the company will identify him/her.
+
 2- Erase the File if, for some reason you need to do it again, you can... just erase it and that`s it. Start again.
+
 3- You can search the file to see what data did you write for the person, and also modify if you find any mistake on it. 
+
 4- You can see three lists. The definitive person created (with the file), only the person (without the file), and only the                files. ¿Why three lists? Simply because I can and I wanted to show you how I manage the object List.
-5- Statistic of what you are entering. I think every program have a minimum of short statistics, it`s nice, it helps, I like                it.           
+
+5- Statistic of what you are entering. I think every program have a minimum of short statistics, it`s nice, it helps, I like                it.
+
 6- Save and load data. This is very important, you can save your work, turn off the computer and turn on the next day with the             information still in the system. ¿How? Because, when you saved it, all the information will be stored in a repository that               is linked in the code (an XML file). Tomorrow you will have to go to number five and recovered what you have done if you                 want to see all the information loaded.
      
 
