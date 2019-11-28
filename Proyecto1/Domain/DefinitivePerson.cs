@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Proyecto1.Domain
 {
-    [Serializable]
-    public class DefinitivePerson : Person
+    [Serializable] // Indica que esta clase se puede transformar en un archivo.
+    public class DefinitivePerson : Person // Hereda de Person, DefinitivePerson es una Person.
     {
+        // Variable a utilizar.
+
         private string fileDef;
         public string FileDef
         {
@@ -23,7 +25,7 @@ namespace Proyecto1.Domain
 
         }
 
-        public void showDefPerson()
+        public void showDefPerson() // Me muestra la definitivePerson que se ha creado para que el usuario vea. 
         {
             Console.WriteLine(" ");
             Console.WriteLine("Persona Definitiva");

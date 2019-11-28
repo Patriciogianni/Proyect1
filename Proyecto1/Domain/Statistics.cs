@@ -8,7 +8,7 @@ namespace Proyecto1.Domain
 {
     class Statistics
     {
-        public void showStatistics(List<DefinitivePerson> df)
+        public void showStatistics(List<DefinitivePerson> df) // Recibe la lista porque de ahi saca toda la información ya que es la definitiva.
         {
             Console.WriteLine("Cantidad de Empleados: {0}", df.Count());
             Console.WriteLine("Cantidad de Hombres: {0}", df.Count(r => r.Gender == "M"));

@@ -6,20 +6,22 @@ using System.Threading.Tasks;
 
 namespace Proyecto1.Domain
 {
-    class User
+    public class User
     {
-        private string name;
-        private string password;
-        public string Name
+        // Declaración de variables a utilizar.
+
+        private string uName;
+        private string password; // Será el legajo del usuario. 
+        public string UName
         {
             get
             {
-                return name;
+                return uName;
             }
 
             set
             {
-                name = value;
+                uName = value;
             }
         }
         public string Password
@@ -29,10 +31,10 @@ namespace Proyecto1.Domain
                 return password;
             }
 
-            set
+            set // Una validación simple como para que escriba bien la contraseña.
             {
                
-               if (!value.StartsWith("L"))
+               if (!value.StartsWith("L")) // value es como si fuera un "this".
                {
                  Console.WriteLine("Contraseña Incorrecta, ingrese nuevamente. Debe ser el numero de su legajo: L___");
                  password = value;   

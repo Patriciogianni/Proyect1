@@ -9,12 +9,12 @@ using System.Xml.Serialization;
 
 namespace Proyecto1.Domain
 {
-    class Menu
+    class Menu : User // Hereda el usuario que lo está utilizando.
     {
         private static int opcion;
         private static string listDesition;
 
-        Person createPerson()
+        Person createPerson(User u) // Le paso el usuario.
         {
             Person person = new Person();
 
@@ -46,7 +46,9 @@ namespace Proyecto1.Domain
 
             person.generateCode(person);
 
-            person.PersonDate = DateTime.Now;
+            person.PersonDate = DateTime.Now; // Le asigno la fecha de hoy.
+            
+            person.UserApp = u; // Le asigno el usuario que le traigo.
 
             person.show(); // Me muestra la persona completa para verificar que este bien cargado.
 
@@ -59,7 +61,6 @@ namespace Proyecto1.Domain
             Console.WriteLine("Ingrese el codigo de la persona");
             string Code = Console.ReadLine();
             file.Person = personList.Find(p => Code.Equals(p.Code)); // Recorre la lista y encuentra una persona donde la condicion de que el codigo y el Id sean iguales, para luego mostrarlo.
-            // la clase file tiene como atributo a Person (persona)
             file.toString();//Lo mostramos.
             Console.WriteLine("Se ha generado con éxito el numero de Legajo");
             Console.WriteLine(" ");
@@ -148,9 +149,10 @@ namespace Proyecto1.Domain
                 switch (opcionList)
                 {
                     case 1:
+                        Console.WriteLine(" ");
                         Console.WriteLine("Lista de Empleados");
                         Console.WriteLine(" ");
-                        foreach (DefinitivePerson d in defList)
+                        foreach (DefinitivePerson d in defList) // por cada DefinitivePerson en defList haceme tal cosa
                         {
                             Console.WriteLine(d.FileDef + " " + d.Du + " " + d.LastName + ", " + d.Name + " " + d.Code + " " + d.PersonDate);
                         }
@@ -163,18 +165,19 @@ namespace Proyecto1.Domain
                         Console.WriteLine(" ");
                         foreach (Person p in personList)
                         {
-                            Console.WriteLine(p.Code + " " + p.LastName + ", " + p.Name);
+                            Console.WriteLine(p.Code + " " + p.LastName + ", " + p.Name + ", " + p.PersonDate);
                         }
                         Console.WriteLine("----------------------------------------");
                         Console.WriteLine(" ");
                         break;
 
                     case 3:
+                        Console.WriteLine(" ");
                         Console.WriteLine("Lista de Legajos");
                         Console.WriteLine(" ");
                         foreach (File f in fileList)
                         {
-                            Console.WriteLine(f.IdFile + " " + f.Person.LastName + ", " + f.Person.Name);
+                            Console.WriteLine(f.IdFile + " " + f.Person.LastName + ", " + f.Person.Name + ", " + f.Person.PersonDate);
                         }
                         Console.WriteLine(" ");
                         break;
@@ -199,8 +202,10 @@ namespace Proyecto1.Domain
 
         }
 
-         public void showMenu()
+         public void showMenu( User u)
         {
+            // Se instancian todas las listas.
+
             List<Person> personList = new List<Person>();
             List<File> fileList = new List<File>();
             List<DefinitivePerson> defList = new List<DefinitivePerson>();
@@ -235,11 +240,11 @@ namespace Proyecto1.Domain
                     case 0:
 
                         // Se crea la persona y se agrega a la lista de personas.
-                        Person person = createPerson();
+                        Person person = createPerson(u); // Le paso el usaurio.
                         personList.Add(person);
 
                         // Se crea un legajo y se agrega a la lista de legajos.
-                        File file = createFile(personList, generateId().ToString("PG000/00"));
+                        File file = createFile(personList, generateId().ToString("PG000/00")); // Le doy el formato
                         fileList.Add(file);
 
                         // Se crea una persona Definitiva y se le agrega la persona y su respectivo ID Legajo.
@@ -249,6 +254,7 @@ namespace Proyecto1.Domain
                         break;
 
                     case 1:
+                        // Eliminar registros que se hayan copiado mal. 
 
                         Console.WriteLine("Ingrese el codigo del empleado que desea eliminar de forma permanente");
                         string CodeRemoved = Console.ReadLine();
@@ -261,9 +267,11 @@ namespace Proyecto1.Domain
 
                     case 2:
 
+                        // Busqueda y modificación de un campo en la persona.
+
                         Console.WriteLine("Escriba de forma exacta el legajo que desea buscar");
                         string fileSearch = Console.ReadLine();
-                        DefinitivePerson personSearch = defList.Find(r => r.FileDef == fileSearch);
+                        DefinitivePerson personSearch = defList.Find(r => r.FileDef == fileSearch); // Es de ese tipo ya que asi puedo operar con la defList que es del mismo tipo.
                         personSearch.showDefPerson();
 
                         Console.WriteLine("Desea Modificarlo? s / n");
@@ -274,7 +282,7 @@ namespace Proyecto1.Domain
                             Console.WriteLine("1- DU");
                             Console.WriteLine("2- Sexo");
                             Console.WriteLine("3- Apellido");
-                            Console.WriteLine("4- nombre");
+                            Console.WriteLine("4- Nombre");
                             Console.WriteLine("5- Edad");
                             Console.WriteLine("6- FechaDeNacimiento");
 
@@ -284,6 +292,7 @@ namespace Proyecto1.Domain
                         break;
 
                     case 3:
+                        // Muestreo de todas las listas.
 
                         showAllList(defList, personList, fileList);
                         break;
@@ -294,6 +303,7 @@ namespace Proyecto1.Domain
                         break;
 
                     case 5:
+                        // Guardado y carga de datos.
 
                         Console.WriteLine("1.- Guardar los cambios en sistema");
                         Console.WriteLine("2.- Datos Cargados");
@@ -303,25 +313,26 @@ namespace Proyecto1.Domain
                         {
                             case 1:
 
+                                // Creo el hilo con todo el detalle de lo que quiero que se guarde de las tres listas por separado.
                                 using (Stream fs1 = new FileStream(@"C:\Users\User\Desktop\PatoPato\Proyect1/DefinitivePerson.txt", FileMode.Create, FileAccess.Write, FileShare.None))
                                 {
                                     //Ponemelo en un formato xml de tipo lista DefinitivePerson.
                                     XmlSerializer serializer11 = new XmlSerializer(typeof(List<DefinitivePerson>));
-                                    serializer11.Serialize(fs1, defList); // Guardalo
-                                    fs1.Close();
+                                    serializer11.Serialize(fs1, defList); // Guardalo en el hilo que te cree y la lista que quiero
+                                    fs1.Close(); // Siempre al final cerrarlo.
                                 }
 
                                 using (Stream fs2 = new FileStream(@"C:\Users\User\Desktop\PatoPato\Proyect1/Person.txt", FileMode.Create, FileAccess.Write, FileShare.None))
                                 {
                                     XmlSerializer serializer12 = new XmlSerializer(typeof(List<Person>));
-                                    serializer12.Serialize(fs2, personList); // Guardalo
+                                    serializer12.Serialize(fs2, personList); 
                                     fs2.Close();
                                 }
 
                                 using (Stream fs3 = new FileStream(@"C:\Users\User\Desktop\PatoPato\Proyect1/File.txt", FileMode.Create, FileAccess.Write, FileShare.None))
                                 {
                                     XmlSerializer serializer13 = new XmlSerializer(typeof(List<File>));
-                                    serializer13.Serialize(fs3, fileList); // Guardalo
+                                    serializer13.Serialize(fs3, fileList);
                                     fs3.Close();
                                 }
 
@@ -331,12 +342,14 @@ namespace Proyecto1.Domain
                                 break;
 
                             case 2:
+                                // Recuperando listas guardadas.
 
                                 XmlSerializer serializer21 = new XmlSerializer(typeof(List<DefinitivePerson>));
+                                // De donde lo va a recuperar.
                                 using (Stream fs21 = new FileStream("C:/Users/User/Desktop/PatoPato/Proyect1/DefinitivePerson.txt", FileMode.Open, FileAccess.Read, FileShare.None))
                                 {
                                     //Mete lo recuperado de nuevo en la lista.
-                                    defList = (List<DefinitivePerson>)serializer21.Deserialize(fs21);
+                                    defList = (List<DefinitivePerson>)serializer21.Deserialize(fs21); // Recuperame el objeto de tipo lista que se guardo en la ruta en donde me lo fue a buscar.
                                     fs21.Close();
                                 }
 
@@ -361,6 +374,8 @@ namespace Proyecto1.Domain
 
             } while (opcion != 6);
 
+            Console.WriteLine(" ");
+            Console.WriteLine("La aplicación ha sido utilizada por: {0}", u.Password); // El numero de legajo del usuario
             Console.WriteLine("Muchas gracias Vuelva Pronto");
         }
     }

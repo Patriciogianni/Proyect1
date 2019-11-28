@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace Proyecto1.Domain
 {
-    [Serializable]
+    [Serializable] // Indica que esta clase se puede transformar en un archivo.
     public class File
     {
+        // Variables a utilizar. 
+
         private string idFile;
-        private Person person;
+        private Person person; // Es una Person y representa el codigo de la persona.
 
         public string IdFile
         {
@@ -38,10 +40,10 @@ namespace Proyecto1.Domain
             }
 
         }
-        public void toString()
+        public void toString() // Mostrar el legajo y el codigo de la persona a la que le fue asignado ese legajo. 
         {
             Console.WriteLine("Id del legajo: {0}\n", IdFile);
-            Console.WriteLine("Codigo de la persona : {0}\n", Person.Code);
+            Console.WriteLine("Codigo de la persona : {0}\n", Person.Code); // Hace referencia al Person del setter.
         }
     }
 }

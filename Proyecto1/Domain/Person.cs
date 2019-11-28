@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Proyecto1.Domain
 {
-    [Serializable]
-    public class Person
+    [Serializable] // Indica que esta clase se puede transformar en un archivo.
+    public class Person 
     {
+        // Variables a utilizar.
+
         private int du;
         private string gender;
         private string lastName;
@@ -17,6 +19,8 @@ namespace Proyecto1.Domain
         private string dateBirth;
         private string code;
         private DateTime personDate;
+        private User userApp; // Será de tipo User. 
+
         public int Du
         {
             get
@@ -138,17 +142,30 @@ namespace Proyecto1.Domain
 
         }
 
-        public Person generateCode(Person p)
+        public User UserApp
+        {
+            get
+            {
+                return userApp;
+            }
+
+            set
+            {
+                userApp = value;
+            }
+        }
+
+        public Person generateCode(Person p) // Se general el codigo de la persona de forma aleatoria.
         {
             int Code;
             Random random = new Random();
-            Code = random.Next(100, 1000);
-            p.Code = Code.ToString("00000");
+            Code = random.Next(100, 1000); // Que el numero aleatorio sea entre 100 y 1000
+            p.Code = Code.ToString("00000"); // El codigo que se crea se le asigna al codigo de la persona con "00000" al principio
             return p;
             //return Code;
         }
 
-        public void show() // Muestro por patallla lo cargado.
+        public void show() // Muestro por patallla la persona cargada para que el usaurio se fije.
         {
             Console.WriteLine(" ");
             Console.WriteLine("Estos son los Datos Cargados...");
@@ -161,6 +178,7 @@ namespace Proyecto1.Domain
             Console.WriteLine("Fecha de Nacimiento: {0}\n", DateBirth);
             Console.WriteLine("Codigo: {0}\n", Code);
             Console.WriteLine("Día Cargado: {0}\n", PersonDate);
+            Console.WriteLine("Usuario trabajador: {0} - {1}\n", UserApp.Password, userApp.UName); // El usuario que cargo al principio de todo.
             Console.WriteLine("Se ha guardado la persona en la base de datos\n");
             Console.WriteLine("-----------------------------------");
         }
