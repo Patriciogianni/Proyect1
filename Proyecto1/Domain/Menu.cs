@@ -86,6 +86,7 @@ namespace Proyecto1.Domain
             person1.Code = person.Code;
             person1.FileDef = file.IdFile;
             person1.PersonDate = person.PersonDate;
+            person1.UserApp = person.UserApp;
 
             return person1;
         }
@@ -154,7 +155,7 @@ namespace Proyecto1.Domain
                         Console.WriteLine(" ");
                         foreach (DefinitivePerson d in defList) // por cada DefinitivePerson en defList haceme tal cosa
                         {
-                            Console.WriteLine(d.FileDef + " " + d.Du + " " + d.LastName + ", " + d.Name + " " + d.Code + " " + d.PersonDate);
+                            Console.WriteLine(d.FileDef + " " + d.Du + " " + d.LastName + ", " + d.Name + " " + d.Code + " " + d.PersonDate + " " + d.UserApp.Password);
                         }
                         Console.WriteLine("----------------------------------------");
                         break;
@@ -165,7 +166,7 @@ namespace Proyecto1.Domain
                         Console.WriteLine(" ");
                         foreach (Person p in personList)
                         {
-                            Console.WriteLine(p.Code + " " + p.LastName + ", " + p.Name + ", " + p.PersonDate);
+                            Console.WriteLine(p.Code + " " + p.LastName + ", " + p.Name + ", " + p.PersonDate + ", " + p.UserApp.Password);
                         }
                         Console.WriteLine("----------------------------------------");
                         Console.WriteLine(" ");
@@ -196,7 +197,7 @@ namespace Proyecto1.Domain
             Console.WriteLine(" ");
             foreach (DefinitivePerson d in saveList)
             {
-                Console.WriteLine(d.FileDef + " " + d.Du + " " + d.LastName + ", " + d.Name + " " + d.Code + " " + d.PersonDate);
+                Console.WriteLine(d.FileDef + " " + d.Du + " " + d.LastName + ", " + d.Name + " " + d.Code + " " + d.PersonDate + " " + d.UserApp.Password);
             }
             Console.WriteLine(" ");
 
@@ -376,7 +377,8 @@ namespace Proyecto1.Domain
 
             Console.WriteLine(" ");
             Console.WriteLine("La aplicación ha sido utilizada por: {0}", u.Password); // El numero de legajo del usuario
-            Console.WriteLine("Muchas gracias Vuelva Pronto");
+            Console.WriteLine(" ");
+            Console.WriteLine("Muchas gracias Vuelva Pronto!");
         }
     }
 }

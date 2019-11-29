@@ -1,36 +1,36 @@
 <?xml version="1.0"?>
 <ArrayOfFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <File>
-    <IdFile>PG000/64</IdFile>
+    <IdFile>PG000/94</IdFile>
     <Person>
-      <Du>377020263</Du>
+      <Du>38745123</Du>
       <Gender>M</Gender>
       <LastName>Gianni</LastName>
       <Name>Patricio Jose</Name>
       <Age>25</Age>
       <DateBirth>05/11/1994</DateBirth>
-      <Code>00359</Code>
-      <PersonDate>2019-11-27T07:06:26.0072751-03:00</PersonDate>
+      <Code>00204</Code>
+      <PersonDate>2019-11-29T06:48:35.4322436-03:00</PersonDate>
       <UserApp>
-        <UName>Psyduck</UName>
-        <Password>L2569874</Password>
+        <UName>patricio</UName>
+        <Password>L0214</Password>
       </UserApp>
     </Person>
   </File>
   <File>
-    <IdFile>PG000/16</IdFile>
+    <IdFile>PG000/68</IdFile>
     <Person>
-      <Du>39569845</Du>
+      <Du>32147789</Du>
       <Gender>M</Gender>
       <LastName>Ginobili</LastName>
       <Name>Emanuel</Name>
-      <Age>42</Age>
+      <Age>41</Age>
       <DateBirth>05/11/1994</DateBirth>
-      <Code>00817</Code>
-      <PersonDate>2019-11-27T07:07:12.5029345-03:00</PersonDate>
+      <Code>00866</Code>
+      <PersonDate>2019-11-29T06:49:05.5870966-03:00</PersonDate>
       <UserApp>
-        <UName>Psyduck</UName>
-        <Password>L2569874</Password>
+        <UName>patricio</UName>
+        <Password>L0214</Password>
       </UserApp>
     </Person>
   </File>
